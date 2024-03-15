@@ -1,10 +1,7 @@
 package fr.cacib.kata.persistence.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
 import java.time.ZonedDateTime;
@@ -13,9 +10,11 @@ import java.util.Objects;
 @Getter
 @Setter
 @ToString
+@Builder
 @RequiredArgsConstructor
 @Entity
 @Table(name = "t_message")
+@AllArgsConstructor
 public class MessageEntity {
 
     @Id
@@ -26,7 +25,7 @@ public class MessageEntity {
     private String messageContent;
 
     @Column
-    private ZonedDateTime creationDateTime = ZonedDateTime.now();
+    private ZonedDateTime creationDateTime;
 
     @Override
     public final boolean equals(Object o) {

@@ -2,20 +2,19 @@ package fr.cacib.kata.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.jms.core.JmsTemplate;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("queue")
 @RequiredArgsConstructor
+@CrossOrigin
 public class QueueController {
 
     private final JmsTemplate jmsTemplate;
 
     @PostMapping("send")
-    void postMessage() {
-        jmsTemplate.convertAndSend("DEV.QUEUE.1", "Hello world");
+    void postMessage(@RequestBody String messageContent) {
+        jmsTemplate.convertAndSend("DEV.QUEUE.1", messageContent);
     }
 
 }
